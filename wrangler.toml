@@ -1,0 +1,7 @@
+name = "gincanaland-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Servimos directamente los archivos estáticos de este repo
+assets = { directory = ".", binding = "ASSETS" }
+

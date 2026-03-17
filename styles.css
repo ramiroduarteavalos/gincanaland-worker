@@ -1,0 +1,1087 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 60px;
+    min-height: 60px;
+    max-height: 60px;
+}
+
+.title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    color: #4a5568;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.title-text {
+    display: inline;
+}
+
+.score-display {
+    display: flex;
+    gap: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.score, .level {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Screens */
+.screen {
+    display: none;
+    flex: 1;
+    padding: 2rem;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Main Menu */
+.welcome {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: white;
+}
+
+.welcome h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.welcome p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Games Grid */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.game-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 3px solid transparent;
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-color: #feca57;
+}
+
+.game-card.locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: rgba(200, 200, 200, 0.8);
+}
+
+.game-card.locked:hover {
+    transform: none;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+}
+
+.game-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.game-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+}
+
+.game-card p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.reward {
+    background: linear-gradient(45deg, #48cae4, #023e8a);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.sticker-reward {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+}
+
+.lock {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #999;
+}
+
+/* Sticker Collection */
+.sticker-collection {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.sticker-collection h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #4a5568;
+}
+
+.stickers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.sticker {
+    font-size: 3rem;
+    padding: 1rem;
+    background: linear-gradient(45deg, #ff9a9e, #fecfef);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Game Screens */
+.game-screen {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    margin: 1rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid #e2e8f0;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 20px 20px 0 0;
+    height: 40px;
+    min-height: 40px;
+    max-height: 40px;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(-5px);
+}
+
+.game-header h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+}
+
+.game-score {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.game-container {
+    padding: 0.25rem;
+    display: flex;
+    gap: 0.25rem;
+    align-items: stretch;
+    height: calc(100vh - 100px);
+    min-height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    overflow: hidden;
+}
+
+.game-instructions {
+    background: #f7fafc;
+    padding: 1rem;
+    border-radius: 15px;
+    border-left: 4px solid #667eea;
+    min-width: 200px;
+    max-width: 250px;
+    flex-shrink: 0;
+    height: fit-content;
+}
+
+.game-instructions p {
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.game-stats {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 15px;
+    padding: 1rem;
+    margin-top: 1rem;
+    min-width: 200px;
+    max-width: 250px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0;
+}
+
+.stat-item:last-child {
+    margin-bottom: 0;
+}
+
+.stat-label {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    color: #4a5568;
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    font-family: 'Fredoka One', sans-serif;
+    font-weight: 400;
+    color: #2d3748;
+    font-size: 1rem;
+    background: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #e2e8f0;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* Canvas container */
+.canvas-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70%;
+    height: 70%;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Canvas styles */
+canvas {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8f9fa;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+    box-sizing: border-box;
+}
+
+/* Maze specific */
+.maze-container {
+    display: grid;
+    gap: 2px;
+    background: #333;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.maze-cell {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border-radius: 3px;
+}
+
+.maze-wall { background: #2d3748; }
+.maze-path { background: #f7fafc; }
+.maze-start { background: #48bb78; }
+.maze-end { background: #38a169; }
+.maze-player { background: #ed8936; }
+
+/* Snake Game specific - uses same layout as Word Search */
+#snakeGame .game-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    height: calc(100vh - 100px);
+    min-height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    overflow: hidden;
+    align-items: stretch;
+}
+
+#snakeGame canvas {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-sizing: border-box;
+}
+
+/* Pacman Game specific - uses same layout as Word Search */
+#pacmanGame .game-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    height: calc(100vh - 100px);
+    min-height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    overflow: hidden;
+    align-items: stretch;
+}
+
+#pacmanGame canvas {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-sizing: border-box;
+}
+
+/* Word Search specific */
+#wordSearchGame .game-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    height: calc(100vh - 100px);
+    min-height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    overflow: hidden;
+    align-items: stretch;
+}
+
+.word-search-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex: 1;
+    min-height: 70%;
+    height: 70%;
+    width: 100%;
+}
+
+.word-grid-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 2rem;
+}
+
+.word-search-content {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    background: #fff;
+    border-radius: 15px;
+    border: 2px solid #e2e8f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 100%;
+    max-height: 100%;
+    box-sizing: border-box;
+}
+
+.word-grid {
+    display: grid;
+    gap: 2px;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    box-sizing: border-box;
+    grid-template-columns: repeat(21, 1fr);
+    grid-template-rows: repeat(21, 1fr);
+    object-fit: contain;
+}
+
+.word-cell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7fafc;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: clamp(12px, 1.5vw, 20px);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 0;
+    min-height: 0;
+}
+
+.word-cell:hover {
+    background: #e2e8f0;
+}
+
+.word-list-inside {
+    min-width: 250px;
+    max-width: 300px;
+    flex-shrink: 0;
+}
+
+.word-list-inside h4 {
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 1.2rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.word-list-inside .game-instructions {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid #e2e8f0;
+}
+
+.word-list-inside .game-instructions p {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.word-cell.selected {
+    background: #667eea;
+    color: white;
+}
+
+.word-cell.found {
+    background: #48bb78;
+    color: white;
+}
+
+.word-list {
+    background: #f7fafc;
+    padding: 1.5rem;
+    border-radius: 15px;
+    min-width: 200px;
+}
+
+.word-list h4 {
+    margin-bottom: 1rem;
+    color: #4a5568;
+    font-family: 'Fredoka One', cursive;
+}
+
+.word-item {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: white;
+    border-radius: 8px;
+    border-left: 3px solid #667eea;
+    transition: all 0.3s ease;
+}
+
+.word-item.found {
+    background: #c6f6d5;
+    border-left-color: #48bb78;
+    text-decoration: line-through;
+}
+
+/* Victory Screen */
+.victory-content {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.victory-content h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.5rem;
+    color: #4a5568;
+    margin-bottom: 2rem;
+}
+
+.victory-sticker {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
+}
+
+.victory-score {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #48bb78;
+    margin: 1rem 0;
+}
+
+.continue-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.continue-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+
+/* Media query para pantallas grandes (desktop) */
+@media (min-width: 1600px) {
+    .app {
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+    
+    .games-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+    
+    .game-card {
+        padding: 2rem;
+    }
+    
+    .word-search-content {
+        gap: 3rem;
+        padding: 3rem;
+    }
+    
+    .word-grid {
+        max-width: 900px;
+        max-height: 900px;
+    }
+    
+    .word-cell {
+        font-size: clamp(16px, 1.8vw, 24px);
+    }
+}
+
+@media (max-width: 1400px) {
+    .games-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .game-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-instructions {
+        min-width: auto;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    
+    .word-search-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .word-list-inside {
+        min-width: auto;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: row;
+        gap: 0.5rem;
+        text-align: left;
+        padding: 0.75rem;
+        justify-content: space-between;
+    }
+    
+    .title {
+        font-size: 2rem;
+        flex-shrink: 0;
+    }
+    
+    .title-text {
+        display: none;
+    }
+    
+    .score-display {
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        font-size: 1rem;
+    }
+    
+    .games-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .game-card {
+        padding: 1.5rem;
+    }
+    
+    .game-container {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        height: calc(100vh - 80px);
+        min-height: calc(100vh - 80px);
+    }
+    
+    .word-search-container {
+        flex-direction: column;
+    }
+    
+    
+    .word-search-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        max-height: 100%;
+        overflow-y: auto;
+    }
+    
+    .word-grid {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        max-height: 60vh;
+        aspect-ratio: 1;
+    }
+    
+    .canvas-container {
+        min-height: 50vh;
+        height: 50vh;
+    }
+    
+    .game-info-panel {
+        min-width: auto;
+        max-width: 100%;
+    }
+    
+    .word-cell {
+        font-size: clamp(10px, 1.2vw, 16px);
+    }
+    
+    .word-list-inside {
+        min-width: auto;
+        max-width: 100%;
+    }
+
+    /* Word Search mobile: apilar y centrar */
+    #wordSearchGame .game-container {
+        padding: 0.75rem;
+        height: auto;
+        min-height: auto;
+    }
+    
+    #wordSearchGame .word-search-content {
+        flex-direction: column; /* grid arriba, info abajo */
+        gap: 0.75rem;
+        align-items: center;
+        padding: 0.75rem;
+    }
+    
+    #wordSearchGame .word-grid-container {
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+    }
+    
+    /* Hacer la grilla cuadrada y que quepa completa en alto y ancho */
+    #wordSearchGame .word-grid {
+        /* Tomar el menor entre el ancho disponible y el alto disponible (aprox) */
+        width: min(100%, calc(100vh - 260px));
+        /* 260px aprox: header + barra + panel info + paddings */
+        max-width: 100%;
+        aspect-ratio: 1 / 1; /* cuadrado */
+        height: auto; /* controlado por aspect-ratio */
+        margin: 0 auto; /* centrar */
+        gap: 2px;
+        padding: 4px;
+    }
+    
+    #wordSearchGame .word-cell {
+        font-size: clamp(12px, 2.6vw, 18px);
+    }
+    
+    #wordSearchGame .word-list-inside {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    #wordSearchGame .game-instructions {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* Que el recuadro completo quepa en pantalla */
+    #wordSearchGame .game-container {
+        height: calc(100vh - 140px); /* header + barras */
+        min-height: calc(100vh - 140px);
+        max-height: calc(100vh - 140px);
+        overflow: hidden; /* sin scroll de página */
+    }
+
+    #wordSearchGame .word-search-content {
+        max-height: 100%;
+        overflow: hidden;
+    }
+
+    /* Grilla cuadrada ocupando una parte del alto disponible */
+    #wordSearchGame .word-grid {
+        width: min(100%, 56vh);
+        aspect-ratio: 1 / 1;
+        height: auto;
+    }
+
+    /* Tipografías más compactas */
+    #wordSearchGame .word-cell {
+        font-size: clamp(11px, 2.2vw, 16px);
+    }
+
+    /* Lista de palabras: scroll interno si hace falta */
+    #wordSearchGame .word-list-inside {
+        max-height: 38vh;
+        overflow: auto;
+    }
+
+    #wordSearchGame .word-list-inside li {
+        font-size: clamp(12px, 2.8vw, 16px);
+        margin: 2px 0;
+    }
+
+    /* Usar todo el ancho del recuadro y minimizar espacios vacíos */
+    #wordSearchGame .game-container {
+        padding: 0.5rem; /* menos margen externo */
+    }
+
+    #wordSearchGame .word-search-content {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch; /* ocupar todo el ancho */
+        justify-content: flex-start;
+        gap: 0.5rem; /* espacios más compactos */
+        padding: 0.5rem; /* menos padding interno */
+    }
+
+    #wordSearchGame .word-grid-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0; /* sin márgenes laterales */
+    }
+
+    /* Grilla grande pero dejando espacio al panel inferior */
+    #wordSearchGame .word-grid {
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 1/1;
+        flex: 0 0 auto; /* tamaño fijo según ancho */
+    }
+
+    /* Panel de palabras/instrucciones ocupa el resto del alto */
+    #wordSearchGame .word-list-inside {
+        flex: 1 1 auto;
+        min-height: 0; /* permitir que el overflow funcione */
+        overflow: auto; /* scroll interno si hace falta */
+        width: 100%;
+        align-self: stretch;
+    }
+
+    #wordSearchGame .game-instructions {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .word-grid {
+        padding: 8px;
+        gap: 1px;
+    }
+    
+    /* Mantener el header del juego en fila para no ocultar el título */
+    .game-header {
+        flex-direction: row; /* was column */
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: left;
+        padding: 0.75rem;
+    }
+    
+    .game-header h2 {
+        font-size: 1.2rem; /* slightly smaller */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 50vw; /* ensure it fits on mobile */
+        display: block;
+    }
+    
+    /* Canvas responsivo */
+    .canvas-container {
+        min-height: 60vh;
+    }
+    
+    canvas {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+    }
+    
+    /* Ajustes para pantallas muy pequeñas */
+    .maze-container {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    
+    .word-grid {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    /* Ajustes extra para pantallas muy pequeñas */
+    #wordSearchGame .word-search-content {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+    
+    #wordSearchGame .word-grid {
+        width: min(100%, calc(100vh - 240px));
+        gap: 1px;
+        padding: 2px;
+    }
+    
+    #wordSearchGame .word-cell {
+        font-size: clamp(11px, 3.5vw, 16px);
+    }
+
+    /* Más compacto en pantallas pequeñas */
+    #wordSearchGame .game-container {
+        height: calc(100vh - 120px);
+        min-height: calc(100vh - 120px);
+        max-height: calc(100vh - 120px);
+    }
+
+    #wordSearchGame .word-grid {
+        width: min(100%, 54vh);
+    }
+
+    #wordSearchGame .word-cell {
+        font-size: clamp(10px, 3vw, 15px);
+    }
+
+    #wordSearchGame .word-list-inside {
+        max-height: 36vh;
+    }
+
+    #wordSearchGame .word-list-inside li {
+        font-size: clamp(11px, 3.2vw, 15px);
+    }
+}
+
+@media (max-width: 480px) {
+    .app {
+        padding: 0;
+    }
+    
+    .screen {
+        padding: 1rem;
+    }
+    
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .game-card {
+        padding: 1rem;
+    }
+    
+    .game-icon {
+        font-size: 3rem;
+    }
+    
+    .game-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .victory-content {
+        padding: 2rem 1rem;
+        margin: 1rem;
+    }
+    
+    .victory-content h2 {
+        font-size: 2rem;
+    }
+    
+    .victory-sticker {
+        font-size: 4rem;
+    }
+}
+
+/* Media query para pantallas extra pequeñas */
+@media (max-width: 360px) {
+    .app {
+        padding: 0;
+    }
+    
+    .screen {
+        padding: 0.5rem;
+    }
+    
+    .title-text {
+        display: none;
+    }
+    
+    .score-display {
+        gap: 0.25rem;
+    }
+    
+    /* Mantener header del juego en fila también en pantallas muy pequeñas */
+    .game-header {
+        flex-direction: row; /* was column */
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.25rem;
+        text-align: left;
+        padding: 0.5rem;
+    }
+}

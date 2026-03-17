@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧩 GincanaLand</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Fredoka:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">🧩 <span class="title-text">GincanaLand</span></h1>
+            <div class="score-display">
+                <span class="score">⭐ <span id="totalScore">0</span></span>
+                <span class="level">🎯 Nivel <span id="currentLevel">1</span></span>
+            </div>
+        </header>
+
+        <!-- Main Menu -->
+        <div id="mainMenu" class="screen active">
+            <div class="welcome">
+                <h2>¡Bienvenido a la aventura!</h2>
+                <p>Completa todos los desafíos para ganar pegatinas especiales</p>
+            </div>
+            
+            <div class="games-grid">
+                <div class="game-card" id="snakeCard" data-game="snake">
+                    <div class="game-icon">🐍</div>
+                    <h3>Snake</h3>
+                    <p>Alcanza 5 manzanas</p>
+                    <div class="reward">+20 puntos</div>
+                    <div class="sticker-reward">🐍👑</div>
+                </div>
+
+                <div class="game-card locked" id="pacmanCard" data-game="pacman">
+                    <div class="game-icon">👻</div>
+                    <h3>Pacman</h3>
+                    <p>Recolecta 30% de los puntos</p>
+                    <div class="reward">+30 puntos</div>
+                    <div class="sticker-reward">👻🏆</div>
+                    <div class="lock">🔒</div>
+                </div>
+
+                <div class="game-card locked" id="wordCard" data-game="wordsearch">
+                    <div class="game-icon">🔠</div>
+                    <h3>Sopa de Letras</h3>
+                    <p>Encuentra las palabras</p>
+                    <div class="reward">+5 por palabra</div>
+                    <div class="sticker-reward">🏅</div>
+                    <div class="lock">🔒</div>
+                </div>
+
+                <div class="game-card locked" id="tetrisCard" data-game="tetris">
+                    <div class="game-icon">🧱</div>
+                    <h3>Tetris</h3>
+                    <p>Limpia 3 filas</p>
+                    <div class="reward">+50 puntos</div>
+                    <div class="sticker-reward">⭐</div>
+                    <div class="lock">🔒</div>
+                </div>
+            </div>
+
+            <div class="sticker-collection">
+                <h3>🏆 Mi Colección de Pegatinas</h3>
+                <div id="stickerDisplay" class="stickers">
+                    <!-- Las pegatinas se mostrarán aquí -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Snake Game -->
+        <div id="snakeGame" class="screen game-screen">
+            <div class="game-header">
+                <button class="back-btn" onclick="showMainMenu()">← Volver</button>
+                <h2>🐍 Snake</h2>
+                <div class="game-score">Puntos: <span id="snakeScore">0</span></div>
+            </div>
+            <div class="game-container">
+                <div class="word-grid-container">
+                    <div class="word-search-content">
+                        <canvas id="snakeCanvas" width="400" height="400"></canvas>
+                        <div class="word-list-inside">
+                            <div class="game-instructions">
+                                <p>🎯 Objetivo: Alcanza 5 manzanas</p>
+                                <p>🎮 Usa las flechas para moverte</p>
+                                <p>🍎 Come las manzanas rojas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pacman Game -->
+        <div id="pacmanGame" class="screen game-screen">
+            <div class="game-header">
+                <button class="back-btn" onclick="showMainMenu()">← Volver</button>
+                <h2>👻 Pacman</h2>
+                <div class="game-score">Puntos: <span id="pacmanScore">0</span></div>
+            </div>
+            <div class="game-container">
+                <div class="word-grid-container">
+                    <div class="word-search-content">
+                        <canvas id="pacmanCanvas" width="400" height="400"></canvas>
+                        <div class="word-list-inside">
+                            <div class="game-instructions">
+                                <p>🎯 Objetivo: Recolecta 30% de los puntos</p>
+                                <p>🎮 Usa las flechas para moverte</p>
+                                <p>🍎 Come los puntos amarillos</p>
+                                <p>👻 Evita a los fantasmas</p>
+                                <p>🚪 Al alcanzar 30% aparece una puerta de salida</p>
+                            </div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Puntos:</span>
+                                    <span class="stat-value" id="pacmanGameScore">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Restantes:</span>
+                                    <span class="stat-value" id="pacmanRemainingDots">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Progreso:</span>
+                                    <span class="stat-value" id="pacmanProgress">0%/30%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Word Search Game -->
+        <div id="wordSearchGame" class="screen game-screen">
+            <div class="game-header">
+                <button class="back-btn" onclick="showMainMenu()">← Volver</button>
+                <h2>🔠 Sopa de Letras</h2>
+                <div class="game-score">Palabras: <span id="wordScore">0</span>/<span id="totalWords">0</span></div>
+            </div>
+            <div class="game-container">
+                <div class="word-grid-container">
+                    <div class="word-search-content">
+                        <div id="wordGrid" class="word-grid"></div>
+                        <div class="word-list-inside">
+                            <h4>Palabras a encontrar:</h4>
+                            <div id="wordList"></div>
+                            <div class="game-instructions">
+                                <p>🎯 Encuentra todas las palabras</p>
+                                <p>🎮 Haz clic y arrastra para seleccionar</p>
+                                <p>📝 Solo horizontal y vertical</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tetris Game -->
+        <div id="tetrisGame" class="screen game-screen">
+            <div class="game-header">
+                <button class="back-btn" onclick="showMainMenu()">← Volver</button>
+                <h2>🧱 Tetris</h2>
+                <div class="game-score">Puntos: <span id="tetrisScore">0</span></div>
+            </div>
+            <div class="game-container">
+                <div class="word-grid-container">
+                    <div class="word-search-content">
+                        <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+                        <div class="word-list-inside">
+                            <div class="game-instructions">
+                                <p>🎯 Objetivo: Limpia 3 filas</p>
+                                <p>🎮 Usa las flechas para mover y rotar</p>
+                                <p>⬇️ Espacio para bajar rápido</p>
+                            </div>
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Puntos:</span>
+                                    <span class="stat-value" id="tetrisGameScore">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Filas:</span>
+                                    <span class="stat-value" id="tetrisRows">0/3</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Nivel:</span>
+                                    <span class="stat-value" id="tetrisLevel">1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Victory Screen -->
+        <div id="victoryScreen" class="screen">
+            <div class="victory-content">
+                <h2>🎉 ¡Felicidades!</h2>
+                <div class="victory-sticker" id="victorySticker"></div>
+                <p id="victoryMessage"></p>
+                <div class="victory-score">+<span id="victoryPoints">0</span> puntos</div>
+                <button class="continue-btn" onclick="goToNextLevel()">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="gameManager.js"></script>
+    <script src="mobileControls.js"></script>
+    <script src="snake.js"></script>
+    <script src="pacman.js"></script>
+    <script src="wordsearch.js"></script>
+    <script src="tetris.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
